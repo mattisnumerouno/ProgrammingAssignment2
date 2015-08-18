@@ -3,7 +3,7 @@
 
 ## This function sets the objects for the cachesolve function and handles superassignment
 
-makeCacheMatrix <- function(x = matrix()) {
+makeCacheMatrix <- function(x=numeric()) {
   i <- NULL
   get <- function() {x}
   setinv <-function(inverse) {i <<- inverse}
@@ -16,16 +16,14 @@ makeCacheMatrix <- function(x = matrix()) {
 
 ## This function returns a cached value if it's there, and solves for the inverse of object x if it isn't
 
-
-cacheSolve <- function(x, ...) {
-        ## Returns a matrix that is the inverse of 'x'
-    i <- x$getinv()
-    if(!is.null(i)) {
-      message("getting cached data")
-      return(i)
-    }
-    data <- x$get()
-    i <- solve(data, ...)
-    x$setinv(i)
-    i
+cachesolve <- function (x, ...){
+  i <- x$getinv()
+  if(!is.null(i)) {
+    message("getting cached data")
+    return(i)
+  }
+  data <- x$get()
+  i <- solve(data, ...)
+  x$setinv(i)
+  i
 }
